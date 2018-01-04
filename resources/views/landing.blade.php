@@ -52,7 +52,7 @@
 		</div>
     </nav>
 
-		<div class="page-header"  style="background-image: url('../assets/images/landing1.jpeg');">
+		<div class="page-header">
 			<div class="filter"></div>
 			<div class="container">
 			    <div class="motto text-center">

@@ -23,6 +23,7 @@ mix.scripts([
     'public/assets/js/bootstrap-datetimepicker.min.js',
     'public/assets/js/nouislider.js',
     'public/assets/js/paper-kit.js',
+    'public/assets/js/apaa.js',
 
 ], 'public/js/all.js');
 
