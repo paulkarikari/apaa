@@ -34,7 +34,7 @@
 							<a href="{{route('register')}}" 
 							class="text-info"> 
 							<strong>Sign Up</strong></a>
-							</p>
+							<b/p>
 						</form>
 						<div class="forgot">
 							<a href="{{ route('password.request') }}" class="btn btn-link btn-danger">Forgot password?</a>
