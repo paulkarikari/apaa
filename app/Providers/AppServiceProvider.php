@@ -3,29 +3,29 @@
 namespace Apaa\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Apaa\Models\Category\CategoryRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot()
     {
-        //
     }
 
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register()
     {
-        $this->app->bind('CategoryInterface', function (){
-            return new CategoryRepository;
-        });
+        $this->app->bind(
+            'Apaa\Models\Service\CategoryInterface',
+            'Apaa\Models\Service\CategoryRepository'
+        );
+
+        $this->app->bind(
+            'Apaa\Models\Service\ServiceInterface',
+            'Apaa\Models\Service\ServiceRepository'
+        );
     }
 }

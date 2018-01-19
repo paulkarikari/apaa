@@ -3,9 +3,17 @@
 namespace Apaa\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Apaa\Models\Service\ServiceInterface;
 
 class ServicesController extends Controller
 {
+    private $service;
+
+    public function __construct(ServiceInterface $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
