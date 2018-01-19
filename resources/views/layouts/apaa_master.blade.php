@@ -63,7 +63,8 @@
 			    
 			<div class="collapse navbar-collapse" id="navbarToggler">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item">
+					@if (!Auth::check())
+						<li class="nav-item">
 						<a href="{{route('login')}}" class="nav-link">
 							SIGN IN
 						</a>
@@ -74,6 +75,23 @@
 							SIGN UP
 						</a>
 					</li>
+					@endif
+					
+					<div class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#pk" role="button" aria-haspopup="true" aria-expanded="false">
+							<i class="nc-icon nc-single-02" aria-hidden="true"></i>
+							{{Auth::user()->name}}
+						</a>
+						<ul class="dropdown-menu dropdown-menu-right dropdown-danger">
+							<li class="dropdown-header" href="#pk">Options</li>
+							<a class="dropdown-item" href="#pk">Profile</a>
+							@if (Auth::user()->user_type == Config::get('constants.SERVICE_PROVIDER'))
+								<a class="dropdown-item" href="#pk">Services</a>
+							@endif
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="{{url('/logout')}}">Logout</a>
+						</ul>
+                    </div>
 
 				</ul>
 			</div>

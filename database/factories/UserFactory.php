@@ -19,6 +19,8 @@ $factory->define(Apaa\User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
+        'phone' => $faker->phoneNumber,
+        'company' => $faker->sentence(3),
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
     ];

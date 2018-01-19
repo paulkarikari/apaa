@@ -38,20 +38,24 @@
 							<input type="text" class="form-control" value="{{old('company')}}" name="company" placeholder="(optional)">
 
 							<label>Phone</label>
-							<input type="text" class="form-control" value="{{old('phone')}}" name="company" placeholder="Phone">
+							<input type="text" class="form-control" value="{{old('phone')}}" name="phone" placeholder="Phone">
 
 							<label>Password</label>
 							<input type="password" class="form-control" placeholder="Password" 
 							name="password" value="{{old('password')}}">
+
+							<label>Confirm Password</label>
+							<input type="password" class="form-control" placeholder=" Confirm Password" 
+							name="password_confirmation" value="{{old('password')}}">
 							
 							<label>Are you a service provider ?</label>
 							<div class="radio text-center">
 								<label>
-									<input type="radio" value="1" name="user_type" {{ old( 'user_type') ? 'checked' : '' }}> No
+									<input type="radio" value="1" name="user_type" {{ old( 'user_type') == 1 ? 'checked' : '' }}> No
 								</label>
 								&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
-									<input type="radio" value="2" name="user_type" {{ old( 'user_type') ? 'checked' : '' }}> Yes
+									<input type="radio" value="2" name="user_type" {{ old( 'user_type') == 2 ? 'checked' : '' }}> Yes
 								</label>
 							</div>
 							<button class="btn btn-danger btn-block btn-round">SIGN UP</button>
