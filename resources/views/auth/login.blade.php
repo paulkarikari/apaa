@@ -18,11 +18,20 @@
 						<h3 class="title">Welcome</h3>
 						<form class="register-form" method="POST" action="{{ route('login') }}">
 							{{ csrf_field() }}
+						@if ($errors->any())
+							<div class="alert alert-danger">
+								<ul>
+									@foreach ($errors->all() as $error)
+										<li>{{ $error }}</li>
+									@endforeach
+								</ul>
+							</div>
+						@endif
 							<label>Email</label>
-							<input type="text" class="form-control" placeholder="Email">
+							<input type="text" name="email" class="form-control" placeholder="Email">
 
 							<label>Password</label>
-							<input type="password" class="form-control" placeholder="Password">
+							<input type="password" name="password" class="form-control" placeholder="Password">
 							<button class="btn btn-danger btn-block btn-round">Log In</button>
 							
 							<div class="checkbox text-center">
