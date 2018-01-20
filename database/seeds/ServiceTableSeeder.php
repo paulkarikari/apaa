@@ -1,6 +1,6 @@
 <?php
 
-use Apaa\User;
+use Apaa\Models\User\User;
 use Illuminate\Database\Seeder;
 use Apaa\Models\Service\Service;
 use Apaa\Models\Category\Category;
@@ -39,11 +39,11 @@ class ServiceTableSeeder extends Seeder
 
         factory(Service::class, 10)->create([
             'category_id' => 1,
-            'user_id' => 2,
+            'user_id' => 1,
         ]);
         factory(Service::class, 10)->create([
             'category_id' => 2,
-            'user_id' => 2,
+            'user_id' => 1,
         ]);
     }
 }

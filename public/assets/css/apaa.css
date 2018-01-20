@@ -32,3 +32,14 @@ input#landing-input:-ms-input-placeholder {
 	text-align: center;
 	font-weight: 500;
 }
+
+#data-table > tbody > tr > td.actions { 
+	zoom: 1;
+    filter: alpha(opacity=0);
+	opacity: 0;
+}
+#data-table > tbody > tr:hover > td.actions {
+    zoom: 1;
+    filter: alpha(opacity=100);
+	opacity: 1;
+ }

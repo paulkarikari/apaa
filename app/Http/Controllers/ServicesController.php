@@ -2,10 +2,10 @@
 
 namespace Apaa\Http\Controllers;
 
-use Apaa\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Apaa\Models\Service\ServiceInterface;
+use Apaa\Models\User\User;
 
 class ServicesController extends Controller
 {
@@ -25,7 +25,7 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        $this->service->getUserService(Auth::user());
+        return view('user_services', ['services' => $this->service->getUserService(Auth::user())]);
     }
 
     /**

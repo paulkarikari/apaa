@@ -86,7 +86,7 @@
 							<li class="dropdown-header" href="#pk">Options</li>
 							<a class="dropdown-item" href="#pk">Profile</a>
 							@if (Auth::user()->user_type == Config::get('constants.SERVICE_PROVIDER'))
-								<a class="dropdown-item" href="{{route('services.show',['id' => Auth::user()->id])}}">Services</a>
+								<a class="dropdown-item" href="{{route('services.index')}}">Services</a>
 							@endif
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="{{url('/logout')}}">Logout</a>

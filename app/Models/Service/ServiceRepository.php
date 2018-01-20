@@ -25,6 +25,6 @@ class ServiceRepository implements ServiceInterface
 
     public function getUserService(User $user)
     {
-        return $user->services();
+        return $user->services()->get();
     }
 }

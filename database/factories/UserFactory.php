@@ -1,5 +1,6 @@
 <?php
 
+use Apaa\Models\User\User;
 use Faker\Generator as Faker;
 
 /*
@@ -13,7 +14,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Apaa\User::class, function (Faker $faker) {
+$factory->define(User::class, function (Faker $faker) {
     static $password;
 
     return [
