@@ -1,6 +1,6 @@
 <?php
 
-namespace Apaa;
+namespace Apaa\Models\User;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -29,6 +29,6 @@ class User extends Authenticatable
 
     public function services()
     {
-        $this->hasMany('Apaa\Models\Service\Service');
+        return $this->hasMany('Apaa\Models\Service\Service');
     }
 }

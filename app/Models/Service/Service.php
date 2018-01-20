@@ -20,6 +20,6 @@ class Service extends Model
 
     public function user()
     {
-        return $this->belognsT('Apaa\User');
+        return $this->belongsTo('Apaa\Models\User\User');
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -67,7 +66,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Apaa\User::class,
+            'model' => Apaa\Models\User\User::class,
         ],
 
         // 'users' => [
@@ -98,5 +97,4 @@ return [
             'expire' => 60,
         ],
     ],
-
 ];

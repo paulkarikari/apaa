@@ -2,6 +2,8 @@
 
 namespace Apaa\Models\Service;
 
+use Apaa\Models\User\User;
+
 class ServiceRepository implements ServiceInterface
 {
     private $service;
@@ -19,5 +21,10 @@ class ServiceRepository implements ServiceInterface
     public function get(int $serviceId)
     {
         return $this->service->find($serviceId);
+    }
+
+    public function getUserService(User $user)
+    {
+        return $user->services();
     }
 }

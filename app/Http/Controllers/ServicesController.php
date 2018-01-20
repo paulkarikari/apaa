@@ -2,9 +2,10 @@
 
 namespace Apaa\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Apaa\Models\Service\ServiceInterface;
 use Apaa\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Apaa\Models\Service\ServiceInterface;
 
 class ServicesController extends Controller
 {
@@ -24,6 +25,7 @@ class ServicesController extends Controller
      */
     public function index()
     {
+        $this->service->getUserService(Auth::user());
     }
 
     /**
