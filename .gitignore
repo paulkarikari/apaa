@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/images/
+/database/*.sqlite
 /public/img
 /public/storage
 /storage/*.key

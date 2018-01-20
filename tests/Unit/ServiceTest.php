@@ -3,11 +3,11 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function setUp()
     {

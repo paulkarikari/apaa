@@ -12,7 +12,6 @@ class ServicesController extends Controller
     public function __construct(ServiceInterface $service)
     {
         $this->service = $service;
-        dd($service);
     }
 
     /**

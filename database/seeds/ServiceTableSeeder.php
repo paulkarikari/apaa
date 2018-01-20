@@ -1,7 +1,9 @@
 <?php
 
+use Apaa\User;
 use Illuminate\Database\Seeder;
 use Apaa\Models\Service\Service;
+use Apaa\Models\Category\Category;
 
 class ServiceTableSeeder extends Seeder
 {
@@ -10,8 +12,29 @@ class ServiceTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Service::class, 50)->create()->each(function ($service) {
-            $service->posts()->save(factory(App\Post::class)->make());
-        });
+        factory(User::class, 2)->create([
+            'user_type' => 2,
+        ]);
+
+        factory(User::class, 2)->create([
+            'user_type' => 1,
+        ]);
+
+        factory(Category::class)->create([
+            'category_name' => 'Construction',
+        ]);
+
+        factory(Category::class)->create([
+            'category_name' => 'Mechanic',
+        ]);
+
+        factory(Service::class, 10)->create([
+            'category_id' => 1,
+            'user_id' => 2,
+        ]);
+        factory(Service::class, 10)->create([
+            'category_id' => 2,
+            'user_id' => 2,
+        ]);
     }
 }
