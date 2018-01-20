@@ -17,4 +17,9 @@ class Service extends Model
     {
         return $this->belongsTo('Apaa\Models\Category\Category');
     }
+
+    public function user()
+    {
+        return $this->belognsT('Apaa\User');
+    }
 }

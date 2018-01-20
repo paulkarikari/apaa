@@ -12,6 +12,15 @@ class ServiceTableSeeder extends Seeder
      */
     public function run()
     {
+        factory(User::class)->create([
+            'email' => 'paulkarikari1@gmail.com',
+            'user_type' => 2,
+        ]);
+
+        factory(User::class)->create([
+            'email' => 'client@gmail.com',
+            'user_type' => 1,
+        ]);
         factory(User::class, 2)->create([
             'user_type' => 2,
         ]);

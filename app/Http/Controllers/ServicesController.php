@@ -4,14 +4,17 @@ namespace Apaa\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Apaa\Models\Service\ServiceInterface;
+use Apaa\User;
 
 class ServicesController extends Controller
 {
     private $service;
+    private $user;
 
-    public function __construct(ServiceInterface $service)
+    public function __construct(ServiceInterface $service, User $user)
     {
         $this->service = $service;
+        $this->user = $user;
     }
 
     /**
@@ -52,7 +55,6 @@ class ServicesController extends Controller
      */
     public function show($id)
     {
-        echo $id;
     }
 
     /**
