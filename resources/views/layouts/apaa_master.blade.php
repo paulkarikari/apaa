@@ -98,6 +98,38 @@
 		</div>
 	</nav>
 	<div class="container" style="margin-top: 80px;" id="app">
+		@if ($errors->any())
+			<div class="alert alert-danger alert-with-icon" data-notify="container">
+                    <div class="container">
+                        <div class="alert-wrapper">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <i class="nc-icon nc-simple-remove"></i>
+                            </button>
+							<div class="message"><i class="nc-icon nc-bell-55"></i>
+								<strong>Service Not Saved</strong>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</div>
+                        </div>
+                    </div>
+                </div>
+		@endif
+		@if (session('success'))
+			<div class="alert alert-success alert-with-icon" data-notify="container">
+                    <div class="container">
+                        <div class="alert-wrapper">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <i class="nc-icon nc-simple-remove"></i>
+                            </button>
+							<div class="message"><i class="nc-icon nc-bell-55"></i>
+								<strong> &nbsp;{{session('success')}} </strong>
+							</div>
+                        </div>
+                    </div>
+                </div>
+		@endif
+
 		@yield('content')
 	</div>
 

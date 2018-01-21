@@ -6,16 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Apaa\Models\Service\ServiceInterface;
 use Apaa\Models\User\User;
+use Apaa\Models\Category\CategoryInterface;
+use Apaa\Http\Requests\NewServiceRequest;
 
 class ServicesController extends Controller
 {
     private $service;
-    private $user;
+    private $category;
 
-    public function __construct(ServiceInterface $service, User $user)
+    public function __construct(ServiceInterface $service, CategoryInterface $category)
     {
         $this->service = $service;
-        $this->user = $user;
+        $this->category = $category;
     }
 
     /**
@@ -27,6 +29,7 @@ class ServicesController extends Controller
     {
         return view('user_services', [
                 'services' => $this->service->getUserService(Auth::user())->paginate(10),
+                'categories' => $this->category->getAll(),
             ]);
     }
 
@@ -46,8 +49,11 @@ class ServicesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NewServiceRequest $request)
     {
+        $this->service->save($request->all(), Auth::user());
+
+        return back()->with('success', 'Service Add succefully');
     }
 
     /**

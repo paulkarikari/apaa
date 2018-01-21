@@ -2,6 +2,7 @@
 
 namespace Apaa\Models\User;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -30,5 +31,10 @@ class User extends Authenticatable
     public function services()
     {
         return $this->hasMany('Apaa\Models\Service\Service');
+    }
+
+    public function isServiceProdiver()
+    {
+        return $this->getAttribute('user_type') == Config::get('constants.SERVICE_PROVIDER');
     }
 }

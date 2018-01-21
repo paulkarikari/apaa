@@ -1,7 +1,8 @@
 <?php
+
 namespace Apaa\Models\Category;
 
-interface CategoryInterface 
+interface CategoryInterface
 {
-    public function get(int $categoryId);
+    public function getAll();
 }

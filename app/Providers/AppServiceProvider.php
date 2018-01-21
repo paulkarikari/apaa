@@ -27,5 +27,10 @@ class AppServiceProvider extends ServiceProvider
             'Apaa\Models\Service\ServiceInterface',
             'Apaa\Models\Service\ServiceRepository'
         );
+
+        $this->app->bind(
+            'Apaa\Models\Category\CategoryInterface',
+            'Apaa\Models\Category\CategoryRepository'
+        );
     }
 }

@@ -6,7 +6,7 @@ use Apaa\Models\User\User;
 
 interface ServiceInterface
 {
-    public function create(array $serviceData);
+    public function save(array $serviceData, User $user);
 
     public function get(int $serviceId);
 

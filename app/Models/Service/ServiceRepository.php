@@ -13,9 +13,15 @@ class ServiceRepository implements ServiceInterface
         $this->service = $service;
     }
 
-    public function create(array $serviceDate)
+    /**
+     * create service for the current user.
+     *
+     * @param array $serviceData
+     * @param User  $user
+     */
+    public function save(array $serviceData, User $user)
     {
-        return $this->service->create($serviceDate);
+        return $user->services()->create($serviceData);
     }
 
     public function get(int $serviceId)
