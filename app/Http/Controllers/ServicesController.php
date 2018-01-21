@@ -25,7 +25,9 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        return view('user_services', ['services' => $this->service->getUserService(Auth::user())]);
+        return view('user_services', [
+                'services' => $this->service->getUserService(Auth::user())->paginate(10),
+            ]);
     }
 
     /**
