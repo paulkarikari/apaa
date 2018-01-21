@@ -42568,19 +42568,86 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-        console.log(this.services);
+    mounted: function mounted() {},
+
+    props: ['services', 'categories', 'csrfToken'],
+    data: function data() {
+        return {
+            servicesData: {
+                service_name: '',
+                description: '',
+                category_id: 1
+            },
+            baseUrl: '/services/',
+            updateUrl: ''
+        };
     },
 
-    props: ['services']
-    /* data () {
-        return {
-            servicesData: null
+    methods: {
+        setUpEditForm: function setUpEditForm(service) {
+            this.updateUrl = this.baseUrl + service.id;
+            this.servicesData = _.cloneDeep(service);
+        },
+        showDeleteForm: function showDeleteForm(service) {
+            this.updateUrl = this.baseUrl + service.id;
         }
-    } */
+    }
 });
 
 /***/ }),
@@ -42613,12 +42680,284 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(service.category.category_name))]),
             _vm._v(" "),
-            _vm._m(1, true)
+            _c("td", { staticClass: "actions d-flex" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm btn-primary mx-1",
+                  attrs: {
+                    "data-toggle": "modal",
+                    "data-target": "#updateServiceModel"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.setUpEditForm(service)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-edit",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm btn-danger mx-1",
+                  attrs: {
+                    "data-toggle": "modal",
+                    "data-target": "#deleteServiceModel"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.showDeleteForm(service)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-trash-o",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
+              )
+            ])
           ])
         })
       ),
       _vm._v(" "),
-      _vm._m(2)
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "deleteServiceModel",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "deleteModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._m(2),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "divider" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "right-side" }, [
+                    _c(
+                      "form",
+                      { attrs: { method: "POST", action: _vm.updateUrl } },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "hidden",
+                            name: "_method",
+                            value: "DELETE"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          attrs: { type: "hidden", name: "_token" },
+                          domProps: { value: _vm.csrfToken }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-link",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Delete")]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "updateServiceModel",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c(
+                  "form",
+                  { attrs: { method: "POST", action: _vm.updateUrl } },
+                  [
+                    _c("input", {
+                      attrs: { type: "hidden", name: "_method", value: "PUT" }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "hidden", name: "_token" },
+                      domProps: { value: _vm.csrfToken }
+                    }),
+                    _vm._v(" "),
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("label", [_vm._v("Name of Service")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.servicesData.service_name,
+                            expression: "servicesData.service_name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          required: "",
+                          type: "text",
+                          name: "service_name",
+                          placeholder: "Enter Service Name"
+                        },
+                        domProps: { value: _vm.servicesData.service_name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.servicesData,
+                              "service_name",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("label", [_vm._v("Description")]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.servicesData.description,
+                            expression: "servicesData.description"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          required: "",
+                          name: "description",
+                          rows: "3",
+                          placeholder: "Describe you service"
+                        },
+                        domProps: { value: _vm.servicesData.description },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.servicesData,
+                              "description",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("label", [_vm._v("Category")]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.servicesData.category_id,
+                              expression: "servicesData.category_id"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { reguired: "", name: "category_id" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.servicesData,
+                                "category_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        _vm._l(_vm.categories, function(category) {
+                          return _c(
+                            "option",
+                            {
+                              key: category.id,
+                              domProps: { value: category.id }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                      " +
+                                  _vm._s(category.category_name) +
+                                  "\n                                  "
+                              )
+                            ]
+                          )
+                        })
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(5)
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      )
     ]
   )
 }
@@ -42645,36 +42984,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "actions d-flex" }, [
+    return _c("div", { staticClass: "modal-header" }, [
       _c(
-        "button",
+        "h5",
         {
-          staticClass: "btn btn-sm btn-primary mx-1",
-          attrs: {
-            "data-toggle": "modal",
-            "data-target": "#updateServiceModel"
-          }
+          staticClass: "modal-title text-center",
+          attrs: { id: "deleteModalLabel" }
         },
-        [
-          _c("i", {
-            staticClass: "fa fa-edit",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
+        [_vm._v("Confirmation")]
       ),
       _vm._v(" "),
       _c(
-        "a",
+        "button",
         {
-          staticClass: "btn btn-sm btn-danger mx-1",
-          attrs: { href: "#delete" }
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
         },
-        [
-          _c("i", {
-            staticClass: "fa fa-trash-o",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
   },
@@ -42682,88 +43012,95 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "updateServiceModel",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("h2", { staticClass: "text-center text-muted" }, [
+        _c("i", {
+          staticClass: "fa fa-question-circle-o",
+          attrs: { "aria-hidden": "true" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("h2", { staticClass: "text-center text-muted" }, [
+        _vm._v("Are you Sure ?")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "left-side" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default btn-link",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Cancel")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        {
+          staticClass: "modal-title text-center",
+          attrs: { id: "serviceModalLabel" }
+        },
+        [_vm._v("\n                                  Update service")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c("div", { staticClass: "left-side" }, [
         _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          "button",
+          {
+            staticClass: "btn btn-default btn-link",
+            attrs: { type: "button", "data-dismiss": "modal" }
+          },
           [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  {
-                    staticClass: "modal-title text-center",
-                    attrs: { id: "exampleModalLabel" }
-                  },
-                  [_vm._v("Update Service")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _vm._v(
-                  " Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.\n                      "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c("div", { staticClass: "left-side" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-default btn-link",
-                      attrs: { type: "button", "data-dismiss": "modal" }
-                    },
-                    [_vm._v("Never mind")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "divider" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "right-side" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger btn-link",
-                      attrs: { type: "button" }
-                    },
-                    [_vm._v("Delete")]
-                  )
-                ])
-              ])
-            ])
+            _vm._v(
+              "\n                                  Cancel\n                              "
+            )
           ]
         )
-      ]
-    )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "divider" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "right-side" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success btn-link",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Update Service")]
+        )
+      ])
+    ])
   }
 ]
 render._withStripped = true

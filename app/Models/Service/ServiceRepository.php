@@ -33,4 +33,19 @@ class ServiceRepository implements ServiceInterface
     {
         return $user->services()->with('category');
     }
+
+    public function update(array $serviceData, int $id)
+    {
+        return $this->service->find($id)->update($serviceData);
+    }
+
+    public function delete(int $id)
+    {
+        return $this->service->find($id)->delete();
+    }
+
+    public function getRandomServices()
+    {
+        return $this->service->with('user')->inRandomOrder();
+    }
 }

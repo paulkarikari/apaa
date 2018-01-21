@@ -11,4 +11,8 @@ interface ServiceInterface
     public function get(int $serviceId);
 
     public function getUserService(User $user);
+
+    public function update(array $serviceData, int $id);
+
+    public function delete(int $id);
 }

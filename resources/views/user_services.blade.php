@@ -7,7 +7,8 @@
         <i class="fa fa-plus" aria-hidden="true"></i> Add Service
     </button>
 
-    <services-table :services='{{ json_encode( $services->items() ) }}'></services-table>
+    <services-table :services='{{ json_encode( $services->items() ) }}' 
+        :categories='{{$categories}}' :csrf-token='"{{ csrf_token() }}"'></services-table>
 
     <div class="d-flex justify-content-center align-content-center">
         <!--  renders pagination link with bootsrap style  -->
@@ -19,7 +20,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form  method="POST" action="{{ route('services.store') }}">
-                    {{ csrf_field() }}
+                    {{--  {{ csrf_field() }}  --}}
                 <div class="modal-header">
                     <h5 class="modal-title text-center" id="serviceModalLabel">Add New Service</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

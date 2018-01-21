@@ -2,12 +2,10 @@
 
 namespace Apaa\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Apaa\Models\Service\ServiceInterface;
-use Apaa\Models\User\User;
 use Apaa\Models\Category\CategoryInterface;
-use Apaa\Http\Requests\NewServiceRequest;
+use Apaa\Http\Requests\ServiceRequest;
 
 class ServicesController extends Controller
 {
@@ -21,77 +19,49 @@ class ServicesController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a the current service provider services.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         return view('user_services', [
-                'services' => $this->service->getUserService(Auth::user())->paginate(10),
+                'services' => $this->service->getUserService(auth()->user())->paginate(10),
                 'categories' => $this->category->getAll(),
             ]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Add a new service to current user's services.
      *
      * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(NewServiceRequest $request)
+    public function store(ServiceRequest $request)
     {
-        $this->service->save($request->all(), Auth::user());
+        $this->service->save($request->all(), auth()->user());
 
         return back()->with('success', 'Service Add succefully');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Updates current user's specified service.
      *
      * @param \Illuminate\Http\Request $request
      * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ServiceRequest $request, $id)
     {
+        $this->service->update($request->all(), $id);
+
+        return back()->with('success', 'Service Update Successfully');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified service from current user list of services.
      *
      * @param int $id
      *
@@ -99,5 +69,8 @@ class ServicesController extends Controller
      */
     public function destroy($id)
     {
+        $this->service->delete($id);
+
+        return back()->with('success', 'Service Deleted Successfully');
     }
 }

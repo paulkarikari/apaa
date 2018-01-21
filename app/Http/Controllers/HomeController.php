@@ -2,23 +2,33 @@
 
 namespace Apaa\Http\Controllers;
 
+use Apaa\Models\Category\CategoryInterface;
+use Apaa\Models\Service\ServiceInterface;
+
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     */
-    public function __construct()
-    {
+    private $category;
+    private $service;
+
+    public function __construct(
+        CategoryInterface $category,
+        ServiceInterface $service
+    ) {
         $this->middleware('auth');
+        $this->category = $category;
+        $this->service = $service;
     }
 
     /**
-     * Show the application dashboard.
+     * Shows authenticated user the search with random services.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('search');
+        return view('search', [
+            'categories' => $this->category->getAll(),
+            'services' => $this->service->getRandomServices()->paginate(10),
+        ]);
     }
 }
