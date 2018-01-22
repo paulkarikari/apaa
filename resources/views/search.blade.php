@@ -7,7 +7,9 @@
             <ul >
                 @foreach ($categories as $category)                  
                     <li class="nav-item">
-                        <a class="nav-link" href="#pk">{{ $category->category_name }}</a>
+                        <a class="nav-link" href="{{route('search.category',['categoryId' => $category->id])}}">
+                            {{ $category->category_name }}
+                        </a>
                     </li>
                 @endforeach
             </ul>

@@ -46,7 +46,7 @@
 							<b/p>
 						</form>
 						<div class="forgot">
-							<a href="{{ route('password.request') }}" class="btn btn-link btn-danger">Forgot password?</a>
+							{{--  <a href="{{ route('password.request') }}" class="btn btn-link btn-danger">Forgot password?</a>  --}}
 						</div>
 					</div>
 				</div>

@@ -41,21 +41,19 @@
                  <i class="fa fa-search"></i>
 				</button>
             </div>
-            
-            
-                
-                <input type="text" class="form-control hidden-sm-down" placeholder="Search for Services" />
-                
-                <button class="btn btn-success hidden-sm-down">
-                    <strong><i class="fa fa-search"></i>Search</strong>
-                </button>
+				<form class="form-inline col-8 hidden-sm-down" 
+					method="POST" action="{{route('search')}}">
+					{{csrf_field()}}
+					<input type="text" name="search" class="form-control col-10"  placeholder="Search for Services">
+					<button type="submit" class="btn btn-success mb-3 col">
+						<strong><i class="fa fa-search"></i>Search</strong>
+					</button>
+				</form>
                 
                <div id="sm-search" class="col m-1 mb-2 hidden-md-up">
-                    <form class="form-inline">
-                        <input type="text" class="form-control" placeholder="Search for Services">
-                        {{--  <button class="btn btn-success col-2">
-                            <strong><i class="fa fa-search"></i></strong>
-                        </button>  --}}
+                    <form class="form-inline" method="POST" action="{{route('search')}}">
+						{{csrf_field()}}
+                        <input type="text" name="search" class="form-control" placeholder="Search for Services">
                     </form>
                </div>
                 
@@ -63,21 +61,8 @@
 			    
 			<div class="collapse navbar-collapse" id="navbarToggler">
 				<ul class="navbar-nav ml-auto">
-					@if (!Auth::check())
-						<li class="nav-item">
-						<a href="{{route('login')}}" class="nav-link">
-							SIGN IN
-						</a>
-					</li>
-					&nbsp;
-					<li class="nav-item">
-						<a href="{{route('register')}}" class="btn btn-danger btn-round">
-							SIGN UP
-						</a>
-					</li>
-					@endif
-					
-					<div class="nav-item dropdown">
+					@if (Auth::check())
+						<div class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#pk" role="button" aria-haspopup="true" aria-expanded="false">
 							<i class="nc-icon nc-single-02" aria-hidden="true"></i>
 							{{Auth::user()->name}}
@@ -92,6 +77,21 @@
 							<a class="dropdown-item" href="{{url('/logout')}}">Logout</a>
 						</ul>
                     </div>
+					@else
+						<li class="nav-item">
+						<a href="{{route('login')}}" class="nav-link">
+							SIGN IN
+						</a>
+					</li>
+					&nbsp;
+					<li class="nav-item">
+						<a href="{{route('register')}}" class="btn btn-danger btn-round">
+							SIGN UP
+						</a>
+					</li>
+					@endif
+					
+					
 
 				</ul>
 			</div>
@@ -129,6 +129,21 @@
                     </div>
                 </div>
 		@endif
+		@if (session('warn'))
+			<div class="alert alert-warning alert-with-icon" data-notify="container">
+                    <div class="container">
+                        <div class="alert-wrapper">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <i class="nc-icon nc-simple-remove"></i>
+                            </button>
+							<div class="message"><i class="nc-icon nc-bell-55"></i>
+								<strong> &nbsp;{{session('warn')}} </strong>
+							</div>
+                        </div>
+                    </div>
+                </div>
+		@endif
+
 
 		@yield('content')
 	</div>

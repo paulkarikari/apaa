@@ -48,4 +48,10 @@ class ServiceRepository implements ServiceInterface
     {
         return $this->service->with('user')->inRandomOrder();
     }
+
+    public function searchService($searchWord)
+    {
+        return $this->service->where('service_name', 'Like', '%'.$searchWord.'%')
+                            ->orWhere('description', 'Like', '%'.$searchWord.'%');
+    }
 }

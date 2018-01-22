@@ -37,13 +37,15 @@
 			<h1>Apaa</h1>
 			<h3>Connecting over 1 million Skilled labours to jobs</h3>
 			<br />
-			<div class="d-flex justify-content-center">
-				<input type="text" id="landing-input" class="form-control col-6" placeholder="Search for Services"> &nbsp;
-				<button class="btn btn-success">
-					<strong>
-						<i class="fa fa-search"> </i>Search </strong>
-				</button>
-			</div>
+			<form class="form-inline col justify-content-center"
+					method="POST" action="{{route('search')}}">
+					{{csrf_field()}}
+					<input type="text" name="search" id="landing-input" class="form-control col-md-6 col-12" placeholder="Search for Services"> &nbsp;
+					<button class="btn btn-success col-md-2 col-12">
+						<strong>
+							<i class="fa fa-search"> </i>Search </strong>
+					</button>
+			</form>
 
 
 		</div>

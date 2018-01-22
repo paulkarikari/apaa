@@ -34,7 +34,19 @@ class ServiceTableSeeder extends Seeder
         ]);
 
         factory(Category::class)->create([
-            'category_name' => 'Mechanic',
+            'category_name' => 'Arts',
+        ]);
+        factory(Category::class)->create([
+            'category_name' => 'Business',
+        ]);
+        factory(Category::class)->create([
+            'category_name' => 'Health',
+        ]);
+        factory(Category::class)->create([
+            'category_name' => 'Education',
+        ]);
+        factory(Category::class)->create([
+            'category_name' => 'IT',
         ]);
 
         factory(Service::class, 10)->create([

@@ -17,7 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/search', 'SearchController@index')->name('home');
+Route::post('/search', 'SearchController@search')->name('search');
+Route::get('/search/{categoryId}/category', 'SearchController@searchByCategory')->name('search.category');
+
 Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::middleware(['auth'])->group(function () {

@@ -15,4 +15,6 @@ interface ServiceInterface
     public function update(array $serviceData, int $id);
 
     public function delete(int $id);
+
+    public function searchService($searchWord);
 }

@@ -15,4 +15,9 @@ class CategoryRepository implements CategoryInterface
     {
         return $this->category->all();
     }
+
+    public function getServices(int $categoryId)
+    {
+        return $this->category->find($categoryId)->services();
+    }
 }

@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use Apaa\Models\User\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ServiceTest extends TestCase
@@ -17,8 +18,9 @@ class ServiceTest extends TestCase
 
     public function test_should_create_service()
     {
+        $user = factory(User::class)->create(['user_type' => 2]);
         $serviceData = factory(\Apaa\Models\Service\Service::class)->make();
-        $createdService = $this->service->create($serviceData->toArray());
+        $createdService = $this->service->save($serviceData->toArray(), $user);
         $this->assertEquals($serviceData->service_name, $createdService->service_name);
     }
 
