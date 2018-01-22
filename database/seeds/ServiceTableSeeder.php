@@ -57,5 +57,21 @@ class ServiceTableSeeder extends Seeder
             'category_id' => 2,
             'user_id' => 1,
         ]);
+        factory(Service::class, 10)->create([
+            'category_id' => 3,
+            'user_id' => 1,
+        ]);
+        factory(Service::class, 10)->create([
+            'category_id' => 4,
+            'user_id' => 1,
+        ]);
+        factory(Service::class, 10)->create([
+            'category_id' => 5,
+            'user_id' => 1,
+        ]);
+        factory(Service::class, 10)->create([
+            'category_id' => 6,
+            'user_id' => 1,
+        ]);
     }
 }
