@@ -61,7 +61,7 @@
 						<strong>Apaa</strong> is a platform that helps over 1 million skilled labours get access to job opportunities.
 					</h5>
 					<br>
-					<a href="#paper-kit" class="btn btn-danger btn-round">See Details</a>
+					{{--  <a href="#paper-kit" class="btn btn-danger btn-round">See Details</a>  --}}
 				</div>
 			</div>
 			<br/>
