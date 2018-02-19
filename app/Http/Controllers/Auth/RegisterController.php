@@ -2,7 +2,7 @@
 
 namespace Apaa\Http\Controllers\Auth;
 
-use Apaa\User;
+use Apaa\Models\User\User;
 use Apaa\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/search';
 
     /**
      * Create a new controller instance.
@@ -61,7 +61,7 @@ class RegisterController extends Controller
      *
      * @param array $data
      *
-     * @return \Apaa\User
+     * @return \Apaa\Models\User
      */
     protected function create(array $data)
     {
