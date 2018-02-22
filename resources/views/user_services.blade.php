@@ -20,7 +20,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form  method="POST" action="{{ route('services.store') }}">
-                    {{--  {{ csrf_field() }}  --}}
+                    {{ csrf_field() }}
                 <div class="modal-header">
                     <h5 class="modal-title text-center" id="serviceModalLabel">Add New Service</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
