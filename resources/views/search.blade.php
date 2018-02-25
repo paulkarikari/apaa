@@ -15,24 +15,11 @@
             </ul>
         </div>
         <div class="col">
-            @foreach ($services as $service)            
-                <div class="col col-md-8 p-2 m-3" style="border: solid 1px #DDDDDD;">
-                    <div class="card-block">
-                        <h5 class="card-title">
-                            <a href="#" style="font-weight:500;">
-                            {{$service->service_name}}
-                            </a>
-                        </h5>
-                        <hr>
-                        <p class="card-text">
-                            {{$service->description}}
-                        </p>
-                        <h6 class="card-subtitle mb-2 text-muted">by {{ $service->user->name }}</h6>
-                        <a href="#" class="card-link text-muted"><i class="fa fa-comments-o fa-2x"></i> 
-                            &nbsp;&nbsp;&nbsp;<strong>comments (40)</strong></a>
-                            <a href="#" class="card-link text-muted"><i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;likes (50)</a>
-                        </div>
-                </div>
+            
+            @foreach ($services as $service)
+                <service-component :service='{{ json_encode($service)}}'
+                :csrf-token='"{{ csrf_token() }}"'>
+                </service-component>
              @endforeach
              <div class="d-flex justify-content-center align-content-center col-md-8 col">
                 <!--  renders pagination link with bootsrap style  -->

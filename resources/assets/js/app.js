@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('services-table', require('./components/ServicesTableComponent.vue'));
+Vue.component('service-component', require('./components/ServiceComponent.vue'));
 
 const app = new Vue({
     el: '#app'

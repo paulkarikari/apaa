@@ -110,7 +110,7 @@
 <script>
     export default {
         mounted() {
-            
+            console.log('service table mounted')
         },
         props: ['services','categories','csrfToken'],
         data () {

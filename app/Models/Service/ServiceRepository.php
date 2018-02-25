@@ -34,6 +34,11 @@ class ServiceRepository implements ServiceInterface
         return $user->services()->with('category');
     }
 
+    public function getServicesWithUsers()
+    {
+        return $this->service->with('user');
+    }
+
     public function update(array $serviceData, int $id)
     {
         return $this->service->find($id)->update($serviceData);
@@ -52,6 +57,7 @@ class ServiceRepository implements ServiceInterface
     public function searchService($searchWord)
     {
         return $this->service->where('service_name', 'Like', '%'.$searchWord.'%')
-                            ->orWhere('description', 'Like', '%'.$searchWord.'%');
+                            ->orWhere('description', 'Like', '%'.$searchWord.'%')
+                            ->with('user');
     }
 }
