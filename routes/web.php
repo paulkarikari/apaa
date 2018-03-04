@@ -25,4 +25,8 @@ Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('services', 'ServicesController');
+    Route::resource('new-services', 'NewServiceRequestController');
+    Route::get('/service/{serviceId}/like', 'ServicesController@like');
+    Route::get('/service/{serviceId}/unlike', 'ServicesController@unlike');
+    Route::post('/service/{serviceId}/addcomment', 'ServicesController@addComment');
 });

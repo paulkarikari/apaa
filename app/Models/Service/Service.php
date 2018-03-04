@@ -11,6 +11,7 @@ class Service extends Model
         'description',
         'user_id',
         'category_id',
+        'likes',
     ];
 
     public function category()
@@ -21,5 +22,10 @@ class Service extends Model
     public function user()
     {
         return $this->belongsTo('Apaa\Models\User\User');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('Apaa\Models\Comment\Comment');
     }
 }

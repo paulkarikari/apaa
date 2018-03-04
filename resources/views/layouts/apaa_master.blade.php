@@ -72,6 +72,14 @@
 							<a class="dropdown-item" href="#pk">Profile</a>
 							@if (Auth::user()->user_type == Config::get('constants.SERVICE_PROVIDER'))
 								<a class="dropdown-item" href="{{route('services.index')}}">Services</a>
+								<a class="dropdown-item" href="{{route('new-services.index')}}">Service Request</a>
+							@endif
+							@if (Auth::user()->user_type == Config::get('constants.CLIENT'))
+								<button class="dropdown-item" 
+								data-toggle="modal"
+								data-target="#requestServiceModal" >
+									Service Request
+								</button>
 							@endif
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="{{url('/logout')}}">Logout</a>

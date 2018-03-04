@@ -42623,6 +42623,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -42682,6 +42684,8 @@ var render = function() {
             _c("td", [_vm._v(_vm._s(service.description))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(service.category.category_name))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(service.likes))]),
             _vm._v(" "),
             _c("td", { staticClass: "actions d-flex" }, [
               _c(
@@ -42979,6 +42983,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Category")]),
         _vm._v(" "),
+        _c("th", [_vm._v("likes")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Action")])
       ])
     ])
@@ -43263,30 +43269,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log(this.service);
+        console.log(this.user);
     },
 
-    props: ['service', 'csrfToken'],
+    props: ['service', 'csrfToken', 'user'],
     data: function data() {
 
         return {
+            comment: '',
             comments: false,
             numberOfLikes: 20,
             numberOfComments: 10,
@@ -43296,14 +43290,56 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         like: function like() {
-            if (this.liked) return this.unlike();
-            this.liked = true;
-            this.numberOfLikes = this.numberOfLikes + 1;
+            var _this = this;
+
+            if (!this.canGiveFeedBack()) return;
+            var url = '/service/' + this.service.id + '/like';
+            axios.get(url).then(function (response) {
+                console.log(response);
+                if (_this.liked) return _this.unlike();
+                _this.liked = true;
+                _this.service.likes = _this.service.likes + 1;
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
         unlike: function unlike() {
-            if (!this.liked) return;
-            this.liked = false;
-            this.numberOfLikes = this.numberOfLikes - 1;
+            var _this2 = this;
+
+            if (!this.canGiveFeedBack()) return;
+            var url = '/service/' + this.service.id + '/unlike';
+            axios.get(url).then(function (response) {
+                console.log(response);
+                if (!_this2.liked) return;
+                _this2.liked = false;
+                _this2.service.likes = _this2.service.likes - 1;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        addComment: function addComment() {
+            var _this3 = this;
+
+            if (!this.canGiveFeedBack()) return;
+            var url = '/service/' + this.service.id + '/addcomment';
+            axios.post(url, {
+                comment: this.comment,
+                service_id: this.service.id
+            }).then(function (response) {
+                _this3.service.comments.push(response.data.comment);
+                _this3.comment = '';
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        canGiveFeedBack: function canGiveFeedBack() {
+            if (!this.user) {
+                return false;
+            }
+            if (this.user.id === this.service.user.id) {
+                return false;
+            }
+            return true;
         }
     }
 });
@@ -43369,9 +43405,10 @@ var render = function() {
           [
             _c("i", { staticClass: "fa fa-comments-o fa-2x" }),
             _vm._v(" \n                   "),
-            _c("strong", [
-              _vm._v("comments (" + _vm._s(_vm.numberOfComments) + ")")
-            ])
+            _c("strong", [_vm._v("comments")]),
+            _vm._v(
+              "\n                (" + _vm._s(_vm.service.comments.length) + ")"
+            )
           ]
         ),
         _vm._v(" "),
@@ -43387,11 +43424,117 @@ var render = function() {
               staticClass: "fa fa-thumbs-o-up fa-2x",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("   likes (" + _vm._s(_vm.numberOfLikes) + ")")
+            _vm._v("   likes (" + _vm._s(_vm.service.likes) + ")")
           ]
         ),
         _vm._v(" "),
-        _vm.comments ? _c("div", [_vm._m(0)]) : _vm._e()
+        _c(
+          "span",
+          {
+            staticClass: "pull-right text-uppercase p-1",
+            staticStyle: { "background-color": "#039BE5", color: "white" }
+          },
+          [_vm._v(_vm._s(_vm.service.category.category_name))]
+        ),
+        _vm._v(" "),
+        _vm.comments
+          ? _c("div", [
+              _c("div", { staticClass: "actionBox" }, [
+                _c(
+                  "ul",
+                  { staticClass: "commentList" },
+                  [
+                    _vm._l(_vm.service.comments, function(feedback) {
+                      return _c("li", { key: feedback.id }, [
+                        _vm._m(0, true),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "commentText" }, [
+                          _c("p", {}, [_vm._v(_vm._s(feedback.comment))]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "date sub-text" }, [
+                            _vm._v(_vm._s(feedback.created_at))
+                          ])
+                        ])
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.service.comments.length == 0,
+                            expression: "service.comments.length == 0"
+                          }
+                        ]
+                      },
+                      [
+                        _c("p", { staticClass: "text-center" }, [
+                          _vm._v("No Comments Yest")
+                        ])
+                      ]
+                    )
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.canGiveFeedBack(),
+                        expression: "canGiveFeedBack()"
+                      }
+                    ],
+                    staticClass: "form-inline",
+                    attrs: { action: "#", role: "form" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.addComment($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.comment,
+                            expression: "comment"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          placeholder: "Your comments",
+                          required: ""
+                        },
+                        domProps: { value: _vm.comment },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.comment = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ]
+                )
+              ])
+            ])
+          : _vm._e()
       ])
     ]
   )
@@ -43401,67 +43544,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "actionBox" }, [
-      _c("ul", { staticClass: "commentList" }, [
-        _c("li", [
-          _c("div", { staticClass: "commenterImage" }, [
-            _c("img", { attrs: { src: "http://placekitten.com/45/45" } })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "commentText" }, [
-            _c("p", {}, [_vm._v("Hello this is a test comment.")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "date sub-text" }, [
-              _vm._v("on March 5th, 2014")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("div", { staticClass: "commenterImage" }, [
-            _c("img", { attrs: { src: "http://placekitten.com/45/45" } })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "commentText" }, [
-            _c("p", {}, [
-              _vm._v(
-                "Hello this is a test comment and this comment is particularly very long and it goes on and on and on."
-              )
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "date sub-text" }, [
-              _vm._v("on March 5th, 2014")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("div", { staticClass: "commenterImage" }, [
-            _c("img", { attrs: { src: "http://placekitten.com/45/45" } })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "commentText" }, [
-            _c("p", {}, [_vm._v("Hello this is a test comment.")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "date sub-text" }, [
-              _vm._v("on March 5th, 2014")
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("form", { staticClass: "form-inline", attrs: { role: "form" } }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", placeholder: "Your comments" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("button", { staticClass: "btn btn-default" }, [_vm._v("Add")])
-        ])
-      ])
+    return _c("div", { staticClass: "commenterImage" }, [
+      _c("img", { attrs: { src: "/assets/images/blank-image.jpg" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("button", { staticClass: "btn btn-default" }, [_vm._v("Add")])
     ])
   }
 ]

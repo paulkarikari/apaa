@@ -1,7 +1,7 @@
 <?php
 
 
-    if (getenv('APP_ENV') != 'local') {
+    if (getenv('APP_ENV') != 'local' && getenv('APP_ENV') != 'testing') {
         $url = parse_url(getenv('DATABASE_URL'));   //get heroku env variables
         $host = $url['host'];
         $username = $url['user'];

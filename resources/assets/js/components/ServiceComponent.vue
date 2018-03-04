@@ -14,44 +14,30 @@
                     {{ service.user.name }}
                 </h6>
                 <span @click="comments = !comments"  
-                class="card-link text-muted"><i class="fa fa-comments-o fa-2x"></i> 
-                    &nbsp;&nbsp;&nbsp;<strong>comments ({{ numberOfComments }})</strong></span>
-                    <span @click="like" class="card-link"  
-                    :class="{ 'text-muted': !liked, 'text-primary': liked }"><i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;likes ({{ numberOfLikes }})</span>
+                class="card-link text-muted">
+                <i class="fa fa-comments-o fa-2x"></i> 
+                    &nbsp;&nbsp;&nbsp;<strong>comments</strong>
+                    ({{service.comments.length}})</span>
+                    <span @click="like" class="card-link"
+                    :class="{ 'text-muted': !liked, 'text-primary': liked }"><i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;likes ({{ service.likes }})</span>
+                    <span class="pull-right text-uppercase p-1" 
+                    style="background-color:#039BE5; color:white;">{{ service.category.category_name }}</span>
                     <div v-if="comments">
                         <div class="actionBox">
                             <ul class="commentList">
-                                <li>
+                                <li v-for="feedback in service.comments" :key="feedback.id">
                                     <div class="commenterImage">
-                                    <img src="http://placekitten.com/45/45" />
+                                    <img src="/assets/images/blank-image.jpg" />
                                     </div>
                                     <div class="commentText">
-                                        <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
-
+                                        <p class="">{{feedback.comment}}</p> <span class="date sub-text">{{feedback.created_at}}</span>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="commenterImage">
-                                    <img src="http://placekitten.com/45/45" />
-                                    </div>
-                                    <div class="commentText">
-                                        <p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
-
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="commenterImage">
-                                    <img src="http://placekitten.com/45/45" />
-                                    </div>
-                                    <div class="commentText">
-                                        <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
-
-                                    </div>
-                                </li>
+                                <li v-show="service.comments.length == 0"><p class="text-center">No Comments Yest</p> </li>
                             </ul>
-                            <form class="form-inline" role="form">
+                            <form v-show="canGiveFeedBack()" action="#" @submit.prevent="addComment" class="form-inline" role="form">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="Your comments" />
+                                    <input v-model="comment" class="form-control" type="text" placeholder="Your comments" required />
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-default">Add</button>
@@ -67,11 +53,13 @@
     export default {
         mounted() {
             console.log(this.service)
+            console.log(this.user)
         },
-        props: ['service','csrfToken'],
+        props: ['service','csrfToken','user'],
         data () {
             
             return {
+                comment: '',
                 comments: false,
                 numberOfLikes: 20,
                 numberOfComments: 10,
@@ -80,14 +68,55 @@
         },
         methods: {
             like () {
-                if (this.liked) return this.unlike()
-                this.liked = true
-                this.numberOfLikes = this.numberOfLikes + 1
+                if(!this.canGiveFeedBack()) return
+                let url = '/service/'+ this.service.id + '/like'
+                axios.get(url)
+                .then((response) => {
+                    console.log(response)
+                    if (this.liked) return this.unlike()
+                    this.liked = true
+                    this.service.likes = this.service.likes + 1
+                }).catch((error) => {
+                    console.log(error);
+                });
+                
             },
             unlike () {
-                if (!this.liked) return
-                this.liked = false
-                this.numberOfLikes = this.numberOfLikes - 1
+                if(!this.canGiveFeedBack()) return
+                let url = '/service/'+ this.service.id + '/unlike'
+                axios.get(url)
+                .then((response) =>{
+                    console.log(response)
+                    if (!this.liked) return
+                    this.liked = false
+                    this.service.likes = this.service.likes - 1
+                }).catch((error) => {
+                    console.log(error);
+                });
+                
+            },
+            addComment () {
+                if(!this.canGiveFeedBack()) return
+                let url = '/service/'+ this.service.id + '/addcomment'
+                axios.post(url, {
+                    comment: this.comment,
+                    service_id: this.service.id
+                }).then((response) => {
+                    this.service.comments.push(response.data.comment);
+                    this.comment = ''
+                }).catch((error)=> {
+                    console.log(error);
+                });
+
+            },
+            canGiveFeedBack (){
+                if (!this.user) {
+                    return false
+                }
+                if(this.user.id === this.service.user.id){
+                    return false
+                }
+                return true
             }
 
         }

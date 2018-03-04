@@ -17,4 +17,6 @@ interface ServiceInterface
     public function delete(int $id);
 
     public function searchService($searchWord);
+
+    public function like($id);
 }

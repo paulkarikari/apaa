@@ -2,24 +2,30 @@
 
 namespace Apaa\Http\Controllers;
 
+use AYLIEN\TextAPI;
+use Illuminate\Http\Request;
+use Apaa\Models\Comment\Comment;
 use Illuminate\Support\Facades\Auth;
+use Apaa\Http\Requests\ServiceRequest;
 use Apaa\Models\Service\ServiceInterface;
 use Apaa\Models\Category\CategoryInterface;
-use Apaa\Http\Requests\ServiceRequest;
 
 class ServicesController extends Controller
 {
     private $service;
     private $category;
+    private $textapi;
 
     public function __construct(ServiceInterface $service, CategoryInterface $category)
     {
         $this->service = $service;
         $this->category = $category;
+        $this->textapi = new TextAPI('565707dc', '2d282a2fecef835667e0432fd1dcce35');
     }
 
     /**
      * Display a the current service provider services.
+     *service.comments.
      *
      * @return \Illuminate\Http\Response
      */
@@ -29,6 +35,37 @@ class ServicesController extends Controller
                 'services' => $this->service->getUserService(auth()->user())->paginate(10),
                 'categories' => $this->category->getAll(),
             ]);
+    }
+
+    public function like($serviceId)
+    {
+        $this->service->like($serviceId);
+
+        return response()->json(['message' => 'service liked successfully']);
+    }
+
+    public function unlike($serviceId)
+    {
+        $this->service->unlike($serviceId);
+
+        return response()->json(['message' => 'service unliked successfully']);
+    }
+
+    public function addComment(Request $request)
+    {
+        $sentiment = $this->textapi->Sentiment(array('text' => $request->get('comment')));
+
+        $comment = $request->all();
+        $comment['user_id'] = auth()->user()->id;
+
+        if ($sentiment->polarity == 'positive') {
+            $comment['sentiment_level'] = 1;
+            $this->service->like($request->get('service_id'));
+        }
+        $createdComment = Comment::create($comment);
+
+        return response()->json(['message' => 'Comment Added Successfully',
+        'comment' => $createdComment,  ]);
     }
 
     /**

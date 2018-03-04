@@ -6,6 +6,7 @@
               <th>Service Name</th>
               <th>Desecription</th>
               <th>Category</th>
+              <th>likes</th>
               <th>Action</th>
           </tr>
           </thead>
@@ -15,6 +16,7 @@
                     <td>{{service.service_name}}</td>
                     <td>{{service.description}}</td>
                     <td>{{service.category.category_name}}</td>
+                    <td>{{service.likes}}</td>
                     <td class="actions d-flex">
                         <button  @click="setUpEditForm(service)" class="btn btn-sm btn-primary mx-1" data-toggle="modal" data-target="#updateServiceModel">
                             <i class="fa fa-edit" aria-hidden="true"></i>

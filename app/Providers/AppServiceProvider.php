@@ -32,5 +32,10 @@ class AppServiceProvider extends ServiceProvider
             'Apaa\Models\Category\CategoryInterface',
             'Apaa\Models\Category\CategoryRepository'
         );
+
+        $this->app->bind(
+            'Apaa\Models\Comment\CommentInterface',
+            'Apaa\Models\Comment\CommentRepository'
+        );
     }
 }

@@ -18,6 +18,6 @@ class CategoryRepository implements CategoryInterface
 
     public function getServices(int $categoryId)
     {
-        return $this->category->find($categoryId)->services();
+        return $this->category->find($categoryId)->services()->orderBy('likes', 'desc')->with('user')->with('category')->with('comments');
     }
 }

@@ -51,13 +51,28 @@ class ServiceRepository implements ServiceInterface
 
     public function getRandomServices()
     {
-        return $this->service->with('user')->inRandomOrder();
+        return $this->service->with('user')->with('category')->with('comments')->inRandomOrder();
     }
 
     public function searchService($searchWord)
     {
         return $this->service->where('service_name', 'Like', '%'.$searchWord.'%')
                             ->orWhere('description', 'Like', '%'.$searchWord.'%')
-                            ->with('user');
+                            ->orderBy('likes', 'desc')->with('user')->with('category')->with('comments');
+    }
+
+    public function like($id)
+    {
+        return $this->service->find($id)->increment('likes');
+    }
+
+    public function unlike($id)
+    {
+        return $this->service->find($id)->decrement('likes');
+    }
+
+    public function addComment($comment)
+    {
+        return $this->service->comments()->create($comment);
     }
 }

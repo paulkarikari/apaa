@@ -133,7 +133,7 @@
 					<div class="card card-profile card-plain">
 						<div class="card-avatar">
 							<a href="#avatar">
-								<img src="../assets/img/faces/clem-onojeghuo-3.jpg" alt="...">
+								<img src="../assets/images/mc_dapaah.jpg" alt="...">
 							</a>
 						</div>
 						<div class="card-body">
@@ -154,7 +154,7 @@
 					<div class="card card-profile card-plain">
 						<div class="card-avatar">
 							<a href="#avatar">
-								<img src="../assets/img/faces/joe-gardner-2.jpg" alt="...">
+								<img src="../assets/images/yvonne-nelson.jpg" alt="...">
 							</a>
 						</div>
 						<div class="card-body">
@@ -176,7 +176,7 @@
 					<div class="card card-profile card-plain">
 						<div class="card-avatar">
 							<a href="#avatar">
-								<img src="../assets/img/faces/erik-lucatero-2.jpg" alt="...">
+								<img src="../assets/images/carpenter.jpg" alt="...">
 							</a>
 						</div>
 						<div class="card-body">
@@ -200,38 +200,59 @@
 
 	<div class="section landing-section">
 		<div class="container">
+			<h2 class="title text-center">Categories</h2>
 			<div class="row">
-				<div class="col-md-8 ml-auto mr-auto">
-					<h2 class="text-center">Keep in touch?</h2>
-					<form class="contact-form">
-						<div class="row">
-							<div class="col-md-6">
-								<label>Name</label>
-								<div class="input-group">
-									<span class="input-group-addon">
-										<i class="nc-icon nc-single-02"></i>
-									</span>
-									<input type="text" class="form-control" placeholder="Name">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<label>Email</label>
-								<div class="input-group">
-									<span class="input-group-addon">
-										<i class="nc-icon nc-email-85"></i>
-									</span>
-									<input type="text" class="form-control" placeholder="Email">
-								</div>
-							</div>
-						</div>
-						<label>Message</label>
-						<textarea class="form-control" rows="4" placeholder="Tell us your thoughts and feelings..."></textarea>
-						<div class="row">
-							<div class="col-md-4 ml-auto mr-auto">
-								<button class="btn btn-danger btn-lg btn-fill">Send Message</button>
-							</div>
-						</div>
-					</form>
+				
+				<div class="col-md-4" style="height:100px;background-color:#AB47BC;">
+					<p class="text-center" style="color:white;padding-top:40px;"> 
+						<a style="color:white;font-size:20px; font-weight:400;" 
+						href="{{route('search.category',['categoryId' => 6])}}">
+							I.T
+						</a>
+					</p>
+				</div>
+				<div class="col-md-4" style="height:100px;background-color:#42A5F5;">
+					<p class="text-center" style="color:white;padding-top:40px;font-size:20px; font-weight:400;">
+						<a style="color:white;font-size:20px; font-weight:400;" 
+							href="{{route('search.category',['categoryId' => 2])}}">
+							Arts
+						</a>
+					</p>
+				</div>
+				<div class="col-md-4" style="height:100px;background-color:#FFA726;">
+					<p class="text-center" style="color:white;padding-top:40px;font-size:20px; font-weight:400;">
+						<a style="color:white;font-size:20px; font-weight:400;"
+						href="{{route('search.category',['categoryId' =>3 ])}}">
+						Business
+						</a>
+					</p>
+				</div>
+			</div>
+             <br />
+			<div class="row">
+				<div class="col-md-4" style="height:100px;background-color:#FF7043;">
+					<p class="text-center" style="color:white;padding-top:40px;font-size:20px; font-weight:400;">
+						<a style="color:white;font-size:20px; font-weight:400;"
+							href="{{route('search.category',['categoryId' => 4])}}">
+							Health
+						</a>
+					</p>
+				</div>
+				<div class="col-md-4" style="height:100px;background-color:#78909C;">
+					<p class="text-center" style="color:white;padding-top:40px;font-size:20px; font-weight:400;">
+						<a style="color:white;font-size:20px; font-weight:400;"
+						href="{{route('search.category',['categoryId' => 5])}}">
+							Education
+						</a>
+					</p>
+				</div>
+				<div class="col-md-4" style="height:100px;background-color:#8D6E63;">
+					<p class="text-center" style="color:white;padding-top:40px;font-size:20px; font-weight:400;">
+						<a style="color:white;font-size:20px; font-weight:400;"
+						href="{{route('search.category',['categoryId' => 1])}}">
+						 Construction
+						</a>
+					</p>
 				</div>
 			</div>
 		</div>
