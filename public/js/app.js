@@ -43269,6 +43269,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -43386,8 +43387,15 @@ var render = function() {
         _vm._v(" "),
         _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }, [
           _vm._v(
-            "by \n                " +
-              _vm._s(_vm.service.user.name) +
+            "by \n                " + _vm._s(_vm.service.user.name) + " | "
+          ),
+          _c("i", {
+            staticClass: "fa fa-phone",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(
+            "\n                    " +
+              _vm._s(_vm.service.user.phone) +
               "\n            "
           )
         ]),

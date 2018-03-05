@@ -12,7 +12,7 @@ class ServiceTableSeeder extends Seeder
      */
     public function run()
     {
-        /* factory(User::class)->create([
+        factory(User::class)->create([
             'email' => 'paulkarikari1@gmail.com',
             'user_type' => 2,
         ]);
@@ -27,7 +27,7 @@ class ServiceTableSeeder extends Seeder
 
         factory(User::class, 2)->create([
             'user_type' => 1,
-        ]); */
+        ]);
 
         factory(Category::class)->create([
             'category_name' => 'Construction',
@@ -49,7 +49,7 @@ class ServiceTableSeeder extends Seeder
             'category_name' => 'IT',
         ]);
 
-        /* factory(Service::class, 10)->create([
+        factory(Service::class, 10)->create([
             'category_id' => 1,
             'user_id' => 1,
         ]);
@@ -72,6 +72,6 @@ class ServiceTableSeeder extends Seeder
         factory(Service::class, 10)->create([
             'category_id' => 6,
             'user_id' => 1,
-        ]); */
+        ]);
     }
 }

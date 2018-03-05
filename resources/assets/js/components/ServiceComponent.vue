@@ -11,7 +11,8 @@
                     {{service.description}}
                 </p>
                 <h6 class="card-subtitle mb-2 text-muted">by 
-                    {{ service.user.name }}
+                    {{ service.user.name }} | <i class="fa fa-phone" aria-hidden="true"></i>
+                        {{ service.user.phone }}
                 </h6>
                 <span @click="comments = !comments"  
                 class="card-link text-muted">
