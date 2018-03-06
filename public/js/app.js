@@ -43480,7 +43480,7 @@ var render = function() {
                       },
                       [
                         _c("p", { staticClass: "text-center" }, [
-                          _vm._v("No Comments Yest")
+                          _vm._v("No Comments Yet")
                         ])
                       ]
                     )

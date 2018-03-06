@@ -34,7 +34,7 @@
                                         <p class="">{{feedback.comment}}</p> <span class="date sub-text">{{feedback.created_at}}</span>
                                     </div>
                                 </li>
-                                <li v-show="service.comments.length == 0"><p class="text-center">No Comments Yest</p> </li>
+                                <li v-show="service.comments.length == 0"><p class="text-center">No Comments Yet</p> </li>
                             </ul>
                             <form v-show="canGiveFeedBack()" action="#" @submit.prevent="addComment" class="form-inline" role="form">
                                 <div class="form-group">
