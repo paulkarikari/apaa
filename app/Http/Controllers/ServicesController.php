@@ -20,7 +20,7 @@ class ServicesController extends Controller
     {
         $this->service = $service;
         $this->category = $category;
-        $this->textapi = new TextAPI('565707dc', '2d282a2fecef835667e0432fd1dcce35');
+        $this->textapi = new TextAPI(env('AYLIEN_APP_ID'), env('AYLIEN_SECRET_KEY'));
     }
 
     /**
