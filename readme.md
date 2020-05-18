@@ -5,7 +5,7 @@
 ## Setup
 
 1. To setup, first clone this repository.  
-   ```git clone https://github.com/koficodes/apaa.git ```
+   ```git clone https://github.com/paulkarikari/apaa.git ```
 2. Move into the cloned directory  
 	``` cd ./apaa ```
 3. Install dependencies with composer  
